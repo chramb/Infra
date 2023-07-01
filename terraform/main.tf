@@ -5,3 +5,7 @@ terraform {
     }
   }
 }
+
+module "github" {
+  source = "./github"
+}
