@@ -6,3 +6,10 @@ terraform {
     }
   }
 }
+
+module "fastmail" {
+  for_each    = toset(var.cloudflare_zone)
+  source      = "./fastmail"
+  domain_name = each.key
+  zone_id     = cloudflare_zone.zone[each.key].id
+}
