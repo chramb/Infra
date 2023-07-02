@@ -30,3 +30,12 @@ resource "cloudflare_record" "fastmail_dkim" {
   value   = "fm${count.index + 1}.${var.domain_name}.dkim.fmhosted.com"
   zone_id = var.zone_id
 }
+
+resource "cloudflare_record" "fastmail_dmarc" {
+  comment = "Fastmail DMARC"
+  name    = "_dmarc"
+  value   = "v=DMARC1; p=quarantine; ruf=mailto:dmarc-reports@${var.domain_name};"
+  ttl     = 1
+  type    = "TXT"
+  zone_id = var.zone_id
+}
